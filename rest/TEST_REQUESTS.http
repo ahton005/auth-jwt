@@ -1,0 +1,54 @@
+### Token by password
+POST http://localhost:8081/api/public/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+> {% client.global.set("token", response.body.token);%}
+
+### Админ в админку
+GET http://localhost:8081/admin
+Authorization: Bearer {{token}}
+
+### Админ в область для пользователей
+GET http://localhost:8081/user
+Authorization: Bearer {{token}}
+
+### Админ в общедоступную область
+GET http://localhost:8081/anon
+Authorization: Bearer {{token}}
+
+### Token by password
+POST http://localhost:8081/api/public/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "user"
+}
+
+> {% client.global.set("token", response.body.token);%}
+
+### Пользователь в админку
+GET http://localhost:8081/admin
+Authorization: Bearer {{token}}
+
+### Пользователь в область для пользователей
+GET http://localhost:8081/user
+Authorization: Bearer {{token}}
+
+### Пользователь в общедоступную область
+GET http://localhost:8081/anon
+Authorization: Bearer {{token}}
+
+### Пользователь без аутентификации в админку
+GET http://localhost:8081/admin
+
+### Пользователь без аутентификации в область для пользователей
+GET http://localhost:8081/user
+
+### Пользователь без аутентификации в общедоступную область
+GET http://localhost:8081/anon
